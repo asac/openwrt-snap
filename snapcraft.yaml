@@ -1,0 +1,31 @@
+name: openwrt-devonly
+version: 1.0
+summary: Development Example for OpenWRT snap
+description: OpenWRT as a snap for ubuntu core (devinspireexample)
+
+apps:
+ openwrt-init:
+   command: openwrt-init
+   plugs: [fullpower]
+   daemon: simple
+
+ openhab-cli:
+   command: openwrt-init
+   plugs: [fullpower]
+
+plugs:
+  fullpower:
+    interface: old-security
+    security-template: unconfined
+
+parts:
+  openwrt-root:
+    plugin: copy
+    source: https://people.canonical.com/~asac/ubuntu-core/openwrt-rootfs/openwrt-omap-default-rootfs.nosym.tar.gz
+    files:
+      '*': '.'
+  wrapper:
+    plugin: copy
+    files:
+      openwrt-init: openwrt-init
+
