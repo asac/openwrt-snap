@@ -23,6 +23,15 @@ To play with it, you should sideload the snap:
 
  `snap install YOURLOCAL.snap`
 
+
+# Using
+
+After install your pi2 has become a dhcp server. Simply connect your computer to it with ether and you will get an IP.
+
+Now you can go and use luci web admin <http://OpenWRT/> and have fun...
+
+![alt text](https://github.com/asac/openwrt-snap/raw/master/openwrt-luci-snap.png "Luci on snappy Core")
+
 # Attention
 
 The snap will highjack all your net interfaces. This means that if you use a LAN connection to connect to device, that LAN connection will go down after installing openwrt snap. 
