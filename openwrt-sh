@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# lets enter the world of the first procd we find (hoping that someone
+# will implement preventing to start multiple or somethign smarter even
+nsenter -m -p -t `pgrep procd | head -n1` chroot $SNAP /bin/sh
+

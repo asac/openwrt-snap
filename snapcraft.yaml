@@ -4,13 +4,15 @@ summary: Development Example for OpenWRT snap
 description: OpenWRT as a snap for ubuntu core (devinspireexample)
 
 apps:
- openwrt-init:
+ init:
    command: openwrt-init
    plugs: [fullpower]
    daemon: simple
-
- openhab-cli:
+ debug-run:
    command: openwrt-init
+   plugs: [fullpower]
+ sh:
+   command: openwrt-sh
    plugs: [fullpower]
 
 plugs:
@@ -28,4 +30,5 @@ parts:
     plugin: copy
     files:
       openwrt-init: openwrt-init
+      openwrt-sh: openwrt-sh
 
