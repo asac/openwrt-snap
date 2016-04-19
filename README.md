@@ -19,30 +19,81 @@ The patch for procd is: <https://git.io/vw3RD> and a recent openwrt trunk snapsh
 
 # Installing
 
-To play with it, you should sideload the snap:
+To install you need to scp or wget the snap on your device and sideload ...
 
- `snap install YOURLOCAL.snap`
+```
+snap install openwrt-devonly_1.0_armhf.snap`
+```
 
+## Warning
 
-# Using
+The snap will hijack all your net interfaces. This means that if you use a LAN
+connection to connect to device, that LAN connection will go down after
+installing openwrt snap. Read the **Usage** section below to understand how to
+connect to your device after installing this snap.
+
+# Usage
+
+## DHCP Server
 
 After install your pi2 has become a dhcp server. Simply connect your computer to it with ether and you will get an IP.
+
+## Luci / WebAdmin
 
 Now you can go and use luci web admin <http://OpenWRT/> and have fun...
 
 ![alt text](https://github.com/asac/openwrt-snap/raw/master/openwrt-luci-snap.png "Luci on snappy Core")
 
-# Attention
+## SSH
 
-The snap will highjack all your net interfaces. This means that if you use a LAN connection to connect to device, that LAN connection will go down after installing openwrt snap. 
-
-You will be able to connect to it by using it as your new dhcp server. Afterwards you can find your pi2 using the hostname "OpenWRT", e.g.
+You can ssh into the snappy core system as usual
 
 ```
-ssh ubuntu@OpenWRT
+# password: ubuntu
+ssh OpenWRT -lubuntu
+ubuntu@openwrt's password: 
+Welcome to Ubuntu Xenial Xerus (development branch) (GNU/Linux 4.3.0-1006-raspi2 armv7l)
+
+ * Documentation:  https://help.ubuntu.com/
+Welcome to snappy Ubuntu Core, a transactionally updated Ubuntu.
+
+ * See https://ubuntu.com/snappy
+
+It's a brave new world here in snappy Ubuntu Core! This machine
+does not use apt-get or deb packages. Please see 'snappy --help'
+for app installation and transactional updates.
+
+Last login: Tue Apr 19 14:49:39 2016 from 192.168.1.141
+ubuntu@localhost:~$
 ```
 
-will work!
+# chroot into openwrt environment
+
+If you are logged in to your snappy Ubuntu Core system through ssh you can switch into the openwrt environment using the convenience `openwrt-devonly.sh` tool:
+
+```
+# need to be root; use sudo ...
+ubuntu@localhost:~$ sudo openwrt-devonly.sh 
+
+
+BusyBox v1.24.1 () built-in shell (ash)
+
+/ # ps
+  PID USER       VSZ STAT COMMAND
+    1 root      1328 S    /sbin/procd
+   37 root       968 S    /sbin/ubusd
+   38 root       676 S    /sbin/askfirst /bin/ash --login
+  290 root       964 S    /sbin/logd -S 16
+  299 root      1244 S    /sbin/rpcd
+  333 root      1428 S    /sbin/netifd
+  354 root      1080 S    /usr/sbin/odhcpd
+  396 root      1312 S    /usr/sbin/uhttpd -f -h /www -r OpenWrt -x /cgi-bin -
+  448 root      1028 S    /usr/sbin/ntpd -n -S /usr/sbin/ntpd-hotplug -p 0.ope
+  517 nobody     864 S    /usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf -k -x /va
+  610 root      1028 S    /bin/sh
+  611 root      1028 R    ps
+/ # 
+```
 
 # TODO
 
