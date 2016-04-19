@@ -9,10 +9,14 @@ mkdir -p $dir/tmp/
 
 #ip netns add wrt-ns
 
+if [ ! -d $SNAP_DATA/overlay ]; then
+  mkdir -p $SNAP_DATA/overlay
+fi
+
 if [ ! -d $SNAP_DATA/etc ]; then
   cp -fr $SNAP/etc $SNAP_DATA/etc-rw
 fi
 
 #unshare -fmpu --net=/var/run/netns/wrt-ns --mount-proc sh -c "mount --bind $SNAP_DATA/etc-rw $SNAP/etc && mount --bind $dir/run $SNAP/run && mount --bind $dir/tmp $SNAP/tmp && mount --bind $dir/var $SNAP/var && mount --bind /dev $SNAP/dev && exec chroot $SNAP/ sh -c \"mount -t sysfs sysfs /sys && exec /sbin/init\""
-unshare -fmpu --mount-proc sh -c "mount --bind $SNAP_DATA/etc-rw $SNAP/etc && mount --bind $dir/run $SNAP/run && mount --bind $dir/tmp $SNAP/tmp && mount --bind $dir/var $SNAP/var && mount --bind /dev $SNAP/dev && exec chroot $SNAP/ sh -c \"mount -t sysfs sysfs /sys && exec /sbin/init\""
+unshare -fmpu --mount-proc sh -c "mount --bind $SNAP_DATA/overlay $SNAP/overlay && mount --bind $SNAP_DATA/etc-rw $SNAP/etc && mount --bind $dir/run $SNAP/run && mount --bind $dir/tmp $SNAP/tmp && mount --bind $dir/var $SNAP/var && mount --bind /dev $SNAP/dev && exec chroot $SNAP/ sh -c \"mount -t sysfs sysfs /sys && exec /sbin/init\""
 
