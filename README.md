@@ -96,9 +96,11 @@ BusyBox v1.24.1 () built-in shell (ash)
 ```
 
 # TODO
-
-* upstream procd
+* upstream procd fixes
 * add config option to use one host iface as wan bridge without managing it
 * develop generic rootfs architecture target to openwrt and upstream
 * investigate how to closer integrate openwrt with a host ubuntu core snapd
+* validate wifi feature with hostapd
+* add support for generating default configs for wifi and lan usb adapters on first boot (or better hotplug, but hard)
+* general definition of what configs should be exported to snappy land
 
