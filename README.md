@@ -103,4 +103,5 @@ BusyBox v1.24.1 () built-in shell (ash)
 * validate wifi feature with hostapd
 * add support for generating default configs for wifi and lan usb adapters on first boot (or better hotplug, but hard)
 * general definition of what configs should be exported to snappy land
+* make x86/amd64/arm64 variants
 
