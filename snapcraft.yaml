@@ -23,7 +23,7 @@ plugs:
 parts:
   openwrt-root:
     plugin: copy
-    source: https://people.canonical.com/~asac/ubuntu-core/openwrt-rootfs/openwrt-omap-default-rootfs.nosym.tar.gz
+    source: https://people.canonical.com/~asac/ubuntu-core/openwrt-rootfs/latest.tar.gz
     files:
       '*': '.'
   wrapper:
