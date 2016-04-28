@@ -26,13 +26,18 @@ and the management scripts will have in the rootfs.
 We will work on integrating the openwrt build into the snapcraft.yaml so this
 becomes even easier.
 
+# Prebuilt snaps
+
+If you don't want to build the snap by yourself you can find recent ones at
+<http://bit.ly/1SuUn9h>. 
+
 # Installing
 
 To install you need to scp or wget the snap on your device and sideload it using
 devmode until we have the interfaces and sandbox properly designed ...
 
 ```
-snap install --devmode openwrt-devmode_1_armhf.snap`
+snap install --devmode openwrt-devmode_1_armhf.snap
 ```
 
 ## Warning
@@ -46,11 +51,11 @@ connect to your device after installing this snap.
 
 ## DHCP Server
 
-After install your pi2 has become a dhcp server. Simply connect your computer to it with ether and you will get an IP.
+After install your pi2/beaglebone has become a dhcp server. Simply connect your computer through its ethernet port and you will get a DHCP lease with IP.
 
 ## Luci / WebAdmin
 
-Now you can go and use luci web admin <http://OpenWRT/> and have fun...
+Now you can go and use luci web admin <http://192.168.1.1/> and have fun...
 
 ![alt text](https://github.com/asac/openwrt-snap/raw/master/docs/openwrt-luci-snap.png "Luci on snappy Core")
 
@@ -65,10 +70,9 @@ others should work too. Key is that your kernel has __PHY config options enabled
 radio shows up as "phy0" when running `iw list`.
 
 With that go to Network-> WIFI in Luci (<https://192.168.1.1/cgi-bin/luci/admin/network/wireless>), edit
-the config so it has the SSID and security you want to use and "enable" the interface.
+the config so it has the SSID and security you want and then "enable" the interface.
 
-Once done you will be able to see your wifi interface has signal in Luci like below and connect with
-your computer to the AP.
+Shortly after you should see your AP on your wifi network and be able to connect to it.
 
 ![alt text](https://github.com/asac/openwrt-snap/raw/master/docs/openwrt-luci-wifi-working.png "Luci WIFI on snappy Core")
 
@@ -78,7 +82,7 @@ You can ssh into the snappy core system as usual
 
 ```
 # password: ubuntu
-ssh OpenWRT -lubuntu
+ssh 192.168.1.1 -lubuntu
 ubuntu@openwrt's password: 
 Welcome to Ubuntu Xenial Xerus (development branch) (GNU/Linux 4.3.0-1006-raspi2 armv7l)
 
