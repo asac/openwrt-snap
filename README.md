@@ -10,19 +10,29 @@ snapcraft snap
 
 # Building - OpenWRT ROOTFS
 
-To produce the example rootfs tarball we used openwrt build system and selected the OMAP target in menuconfig. Afterwards just build openwrt with make and you will
+To produce the example rootfs tarball we used openwrt build system and selected the
+OMAP target in menuconfig. Afterwards just build openwrt with make and you will
 find the tarball we used in your bin/ directory.
 
-For now you need to patch procd so openwrt init can coexist with udev/systemd on same host.
+For now you need to patch procd so openwrt init can coexist with udev/systemd on same host
+and you have to make sure that the tarball has no dangling symlinks. For the purpose of
+getting started you can find a ready to use the snappy-devonly-patches branch from github:
+<https://github.com/asac/openwrt>
 
-The patch for procd is: <https://git.io/vw3RD> and a recent openwrt trunk snapshot with this patch is <https://git.io/vw3RA>
+If you plan to use mac80211 wireless dongles, ensure you also enable all the wireless
+drivers as modules in menuconfig as that will influence the features that hostapd 
+and the management scripts will have in the rootfs.
+
+We will work on integrating the openwrt build into the snapcraft.yaml so this
+becomes even easier.
 
 # Installing
 
-To install you need to scp or wget the snap on your device and sideload ...
+To install you need to scp or wget the snap on your device and sideload it using
+devmode until we have the interfaces and sandbox properly designed ...
 
 ```
-snap install openwrt-devonly_1.0_armhf.snap`
+snap install --devmode openwrt-devmode_1_armhf.snap`
 ```
 
 ## Warning
@@ -46,6 +56,21 @@ Now you can go and use luci web admin <http://OpenWRT/> and have fun...
 
 Things to do here included setting your password, changing your dropbear ssh port to something != 22
 which allows you to directly ssh into the openwrt snap and potentially enable your wifi interface.
+
+## Wireless AP
+
+The snap allows you to make a wireless AP out of your pi2 or beaglebone. For that to work you
+need AP capable wifi dongle. The dongle we used for testing is <http://amzn.to/1JFAaHt> but
+others should work too. Key is that your kernel has __PHY config options enabled so that your
+radio shows up as "phy0" when running `iw list`.
+
+With that go to Network-> WIFI in Luci (<https://192.168.1.1/cgi-bin/luci/admin/network/wireless>), edit
+the config so it has the SSID and security you want to use and "enable" the interface.
+
+Once done you will be able to see your wifi interface has signal in Luci like below and connect with
+your computer to the AP.
+
+![alt text](https://github.com/asac/openwrt-snap/raw/master/docs/openwrt-luci-wifi-working.png "Luci WIFI on snappy Core")
 
 ## SSH
 
