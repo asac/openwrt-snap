@@ -42,7 +42,10 @@ After install your pi2 has become a dhcp server. Simply connect your computer to
 
 Now you can go and use luci web admin <http://OpenWRT/> and have fun...
 
-![alt text](https://github.com/asac/openwrt-snap/raw/master/openwrt-luci-snap.png "Luci on snappy Core")
+![alt text](https://github.com/asac/openwrt-snap/raw/master/docs/openwrt-luci-snap.png "Luci on snappy Core")
+
+Things to do here included setting your password, changing your dropbear ssh port to something != 22
+which allows you to directly ssh into the openwrt snap and potentially enable your wifi interface.
 
 ## SSH
 
@@ -68,6 +71,8 @@ ubuntu@localhost:~$
 ```
 
 # chroot into openwrt environment
+
+**BROKEN IN 16 DUE TO CONFINEMENT & LAUNCHER**
 
 If you are logged in to your snappy Ubuntu Core system through ssh you can switch into the openwrt environment using the convenience `openwrt-devonly.sh` tool:
 

@@ -1,7 +1,7 @@
-name: openwrt-devonly
-version: 1.0
-summary: Development Example for OpenWRT snap
-description: OpenWRT as a snap for ubuntu core (devinspireexample)
+name: openwrt-devmode
+version: 1
+summary: PoC demo of a OpenWRT snappy solution
+description: OpenWRT as a snap for ubuntu core (devinspireexample); use snap install --devmode ...
 
 apps:
  init:
