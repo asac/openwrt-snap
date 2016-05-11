@@ -13,7 +13,7 @@ if [ ! -d $SNAP_DATA/overlay ]; then
   mkdir -p $SNAP_DATA/overlay
 fi
 
-if [ ! -d $SNAP_DATA/etc ]; then
+if [ ! -d $SNAP_DATA/etc-rw ]; then
   cp -fr $SNAP/etc $SNAP_DATA/etc-rw
 fi
 
